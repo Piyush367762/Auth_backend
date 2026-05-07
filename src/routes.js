@@ -1,12 +1,13 @@
 const express = require("express");
 const { login , signup }=require("./controllers/authController");
 const { verifyToken } = require("./middleware/jwtMiddleware");
+const rateLimiter = require("./middleware/rateLimiter");
 
 const router = express.Router();
 
-router.post("/signup",signup);
+router.post("/signup", rateLimiter, signup);
 
-router.post("/login",login);
+router.post("/login", rateLimiter, login);
 
 router.get("/profile",verifyToken ,(req,res)=>{
     res.json({user : req.user});
