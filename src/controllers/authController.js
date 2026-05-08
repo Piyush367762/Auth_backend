@@ -4,10 +4,12 @@ const pool = require("../db");
 const { generateToken } = require("../utils/token");
 
 exports.signup = async (req,res)=>{
-    const { name ,number , email , password } = req.body;//college email id
+    console.log(req.body);
+    const { name , password } = req.body;//college email id
+    
     try{
         const hashed = await bcrypt.hash(password,10);
-        await pool.query("INSERT INTO users(email,password) VALUES($1,$2)",[email,hashed]);//protect from sql injection
+        await pool.query("INSERT INTO users(name,password) VALUES($1,$2)",[name,hashed]);//protect from sql injection
         res.status(201).json({message : "User entered"});
 
     }
@@ -17,7 +19,7 @@ exports.signup = async (req,res)=>{
 };
 
 exports.login = async(req,res)=>{
-    const { email , password}= req.body;
+    const { Username , Password}= req.body;
     try{
         const result = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
         if(result.rows.length==0) return res.status(401);
