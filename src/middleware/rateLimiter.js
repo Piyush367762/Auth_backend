@@ -19,7 +19,7 @@ function rateLimiter(req, res, next) {
 
   if (record.count >= MAX_REQUESTS) {
     const retryAfter = Math.ceil((record.resetTime - now) / 1000);
-
+    console.log(retryAfter);
     res.set("Retry-After", String(retryAfter));
     return res.status(429).json({
       error: "Too many requests. Please try again later.",
