@@ -8,8 +8,8 @@ const router = express.Router();
 router.post("/signup", rateLimiter, signup);
 
 router.post("/login", rateLimiter, login);
-
-router.get("/profile",verifyToken ,(req,res)=>{
+router.get("/logout",logout);
+router.post("/profile",verifyToken ,(req,res)=>{
     res.json({user : req.user});
 });
 
