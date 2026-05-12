@@ -1,5 +1,5 @@
 const express = require("express");
-const { login , signup }=require("./controllers/authController");
+const { login , signup , logout }=require("./controllers/authController");
 const { verifyToken } = require("./middleware/jwtMiddleware");
 const rateLimiter = require("./middleware/rateLimiter");
 
