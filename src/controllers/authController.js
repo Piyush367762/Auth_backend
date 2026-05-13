@@ -16,6 +16,13 @@ exports.signup = async (req,res)=>{
         res.status(500).json({error : err.message});
     }
 };
+exports.signin = async(req,res)=>{
+    console.log(req.body);
+    const { profile_photo,phone,address}=req.body;
+    try{
+    await pool.query("INSERT INTO profiles(profile_photo,phone,address) VALUES($1,$2,$3)",[profile_photo,phone,address]);
+    }
+};
 const token = generateToken({id: user.id , email : user.email});
 exports.login = async(req,res)=>{
     const { email , password }= req.body;
