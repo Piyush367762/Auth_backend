@@ -49,6 +49,12 @@ exports.login = async(req,res)=>{
         res.status(500).json({error: err.message});
     }
 }
+
+function profile(req, res) {
+  return res.json({
+    user: req.user,
+  })
+}
 exports.logout = async(req,res)=>{
     res.clearCookie("auth_token",token,{
             httpOnly:true,
